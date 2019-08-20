@@ -1,12 +1,7 @@
 <section class="altespaco60">
     <?php 
     if(have_posts( )):
-        while ( have_posts() ) : the_post();
-        $imgDestaque = get_post_meta($post->ID, 'horizon_imgDestaque',true) ?? 'false';
-        if( has_post_thumbnail() && $imgDestaque !== 'false'){
-            include( locate_template( 'template-parts/tools/content-imgDestaque.php' ));
-        }   
-            
+        while ( have_posts() ) : the_post(); 
     ?>
         <div class="wp-content">
             <?php echo apply_filters('the_content', get_the_content() ); ?>

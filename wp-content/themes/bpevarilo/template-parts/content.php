@@ -1,6 +1,6 @@
 <section class="container metade-espaco-top">
     <main class="row"> 
-        <section class="">
+        <section class="col-12">
             <article class="col-12 <?php if($template_layout === 'default' || $template_layout === ''){echo "col-md-8";}; ?>">
                 <div id="content" class="site-content" role="main">
                     <?php    
@@ -10,13 +10,7 @@
                     }
                     ?>
                 </div>
-            </article>
-            <?php 
-            if($template_layout === 'default' || $template_layout === ''){
-                get_sidebar( ); 
-            }
-            ?>
-            
+            </article>            
         </section>
     </main>
 </section>

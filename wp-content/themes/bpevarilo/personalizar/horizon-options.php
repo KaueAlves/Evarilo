@@ -403,7 +403,7 @@ $wp_customize->add_control('tipo_de_listagem', array(
         'label'       => __('Quant. Divisões', 'horizon'),
         'section'     => 'horizon_theme_footer',
         'settings'    => 'horizon_theme_options[divisoes_footer]',
-        'default'     => '1',
-        'choices'     => array('1'=>1,'2'=>2,'3'=>3,'4'=>4),
+        'default'     => '5',
+        'choices'     => array('1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5),
     ));
 

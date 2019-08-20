@@ -3,7 +3,7 @@
     global $horizon_theme_options; 
     if ( has_post_thumbnail() ){
 
-        echo '<figure class="" style="background-image:url(\''.get_the_post_thumbnail_url($post,'large').'\')">';
+        echo '<figure class="" style="background-size:contain;background-image:url(\''.get_the_post_thumbnail_url($post,'large').'\')">';
         echo '</figure>';
         echo '<div class="">';
         if($horizon_theme_options['mostrar_datas'] && !is_page()){

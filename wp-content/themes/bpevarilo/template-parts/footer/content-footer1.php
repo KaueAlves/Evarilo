@@ -43,32 +43,7 @@ $horizon_theme_options['cor_borda_top'] = isset($horizon_theme_options['cor_bord
                             ?>
                        </div>
                    </div>                  
-                    <div class="col-md-4">
-                    <?php if ( is_active_sidebar( 'footer-5') ) : ?>
-
-                        <div class="text-center text-md-right footer-instituicoes  bar-white">
-                             <div class="mb-2"><?php dynamic_sidebar("footer-5") ?></div>
-                        </div>
-                        <?php else: ?>
-                            <div class="text-center text-md-right footer-instituicoes  bar-white"></div>
-                        <?php endif ?>
-
-                        <div class="row footer-content-row flex-row-reverse">
-                            <div class="col-md-12 d-flex flex-row-reverse text-right telefone">
-                                <?php if(isset($horizon_theme_options['telefone_1']) && !empty($horizon_theme_options['telefone_1'])){ ?>
-                                    <i class="fa fa-phone"></i>
-                                    <p><?php echo (isset($horizon_theme_options['telefone_1'])?$horizon_theme_options['telefone_1']:'')." ".(isset($horizon_theme_options['telefone_2'])?$horizon_theme_options['telefone_2']:''); ?></p>
-                                <?php } ?>
-                            </div>
-                            <div class="col-12 d-flex flex-row-reverse text-right endereco">
-                                 <?php if(isset($horizon_theme_options['endereco_parte_1']) && !empty($horizon_theme_options['endereco_parte_1'])){ ?>
-                                    <i class="fa fa-globe"></i>
-                                    <p><?php echo isset($horizon_theme_options['endereco_parte_1'])?$horizon_theme_options['endereco_parte_1']:'' ;?><br>
-                                    <?php echo isset($horizon_theme_options['endereco_parte_2'])?$horizon_theme_options['endereco_parte_2']:'' ;?></p>
-                                <?php } ?>
-                            </div>
-                         </div>
-                    </div>
+                    
                </div>
             
             </div>
