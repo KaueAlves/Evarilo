@@ -20,9 +20,9 @@
                     </div>
                     <div class="col-12 col-md-10 text-center copyright">
                     <?php if(is_main_site()) {?>
-                        <?php echo date('Y'); ?> | Secretaria de Infraestrutura e Meio Ambiente 
+                        <?php echo "©".date('Y'); ?> - Evarilo
                     <?php }else{ ?>
-                        <?php echo date('Y'); ?> | Secretaria de Infraestrutura e Meio Ambiente | <?php bloginfo('name') ?>
+                        <?php echo "©".date('Y'); ?> - Evarilo | <?php bloginfo('name') ?>
                     <?php } ?>
                     </div>
                     

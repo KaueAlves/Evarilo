@@ -4,20 +4,4 @@
 	
 </header>
 
-<style>
-/* Header */
-
-header{
-    background-color: #4c6960;
-}
-
-.nav-menu-evarilo li{      
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.navbar-nav li{
-	text-align: left;
-}
-</style>
 

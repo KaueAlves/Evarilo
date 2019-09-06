@@ -7,7 +7,7 @@
         <section class="row">
             <article class="col-12 col-md-12">
                 <div id="content" class="site-content espaco gallery-wrapper" role="main">
-                <div class="col-md-4 grid-sizer"></div>
+                <div class="col-12 col-md-6 col-lg-3 grid-sizer"></div>
                     <?php
                         include( locate_template( 'template-parts/listagem/listagem-grid.php' ));
                     ?>

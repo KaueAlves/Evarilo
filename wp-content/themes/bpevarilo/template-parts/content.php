@@ -1,4 +1,4 @@
-<section class="container metade-espaco-top">
+<section class="content-area container metade-espaco-top">
     <main class="row"> 
         <section class="col-12">
             <article class="col-12 <?php if($template_layout === 'default' || $template_layout === ''){echo "col-md-8";}; ?>">

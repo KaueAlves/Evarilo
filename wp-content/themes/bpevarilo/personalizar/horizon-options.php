@@ -267,7 +267,7 @@ $wp_customize->add_control('tipo_de_listagem', array(
         'section'     => 'horizon_theme_footer',
         'settings'    => 'horizon_theme_options[modelo_de_footer]',
         'default'     => 'footer1',
-        'choices'     => array('footer1' => 'footer1','footer2'=>'footer2'),
+        'choices'     => array('footer1' => 'footer1'),
     ));
 
     // ================= Cor do background
@@ -284,7 +284,7 @@ $wp_customize->add_control('tipo_de_listagem', array(
         'label'       => __('Cor de fundo', 'horizon'),
         'section'     => 'horizon_theme_footer',
         'settings'    => 'horizon_theme_options[cor_footer]',
-        'default'    => '#494d50',
+        'default'    => '#4c6960',
     ));
 
     // Cor dos titulos do Footer

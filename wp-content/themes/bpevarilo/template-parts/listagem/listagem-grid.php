@@ -6,17 +6,19 @@
         while ( have_posts() ) : the_post();
     ?>
     
-    <div class="col-12 col-lg-4 item-post-pa espaco grid-item">
-        <?php if(has_post_thumbnail( $post )) {?>
-            <figure class="<?php if(has_post_thumbnail( $post )){echo "w-100 h-auto";}else{echo "w-25 h-25 padding-top-0";} ?>" style="background-image:url('<?php echo get_the_post_thumbnail_url($post,'large') ?>')">
-            </figure>
-        <?php } ?>
-
-        <div class="<?php echo has_post_thumbnail( $post ) ? 'item-post-info':'' ?>" >
-            <a href="<?php echo get_permalink(); ?>"><h2 class=" t-26"><?php echo get_the_title() ?></h2></a>
-          <?php if(isset($horizon_theme_options['mostrar_datas'])){ ?>  
-            <p class="text-right texto-verde espaco-0 item-post-data"><?php echo get_the_date('d/m/Y') ?></p>
-          <?php } ?>
+    <div class="col-12 col-md-6 col-lg-3 item-post-pa espaco grid-item">
+ 
+        <div class="">
+            <a href="<?php echo get_permalink(); ?>">
+                <div class="card" >
+                    <img src="<?php echo get_the_post_thumbnail_url($post,'medium') ?>" alt="" srcset="" class="card-img-top p-2">
+                    <div class="card-body text-center">
+                        <h2><?php echo get_the_title(); ?></h2>
+                        <h3 class="card-text"><?php echo get_the_excerpt();?></h3>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
     
     <?php

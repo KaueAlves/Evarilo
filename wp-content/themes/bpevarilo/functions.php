@@ -759,3 +759,11 @@ function insert_fb_in_head() {
     }
     echo "";
 }
+
+function inverter_ordem( $query ) {
+    if ( $query->is_home() && $query->is_main_query() ) {
+        $query->set( 'orderby', 'ID' );
+        $query->set( 'order', 'ASC' );
+    }
+}
+add_action( 'pre_get_posts', 'inverter_ordem' );

@@ -19,10 +19,10 @@ $horizon_theme_options['cor_borda_top'] = isset($horizon_theme_options['cor_bord
 
 ?>
 
-    <footer class="main-footer footer3" style="<?php footer_class($horizon_theme_options['cor_footer'],$horizon_theme_options['mostrar_borda_top'],$horizon_theme_options['cor_borda_top']); ?>">
-        <section class="footer-content padding-top espaco">
+    <footer class="main-footer footer ">
+        <section class="footer-content padding-top footer-evarilo">
             <div class="container">
-
+                <img width="75%" src="<?php echo SMA_HORIZON_THEME_URL."/img/sombra-evarilo-e-zunto-1-e1509368932158-1.png";?>" alt="">
                 <div class="row footer-content-row">
                    <div class="col-md-8">
                         <div class="col-12 row">
@@ -48,7 +48,6 @@ $horizon_theme_options['cor_borda_top'] = isset($horizon_theme_options['cor_bord
             
             </div>
         </section>
-        <a id="back-to-top" href="#top"><i class="fa fa-long-arrow-up"></i></a>
         <?php include(locate_template('template-parts/footer/social.php')); ?>
     </footer>
     <?php wp_footer();?>
