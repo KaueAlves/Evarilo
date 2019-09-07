@@ -6,11 +6,11 @@ $horizon_theme_options['endereco_parte_2'] = isset($horizon_theme_options['ender
 $horizon_theme_options['telefone_1'] = isset($horizon_theme_options['telefone_1']) ? $horizon_theme_options['telefone_1'] : "+55 11 3133-3000";
 $horizon_theme_options['telefone_2'] = isset($horizon_theme_options['telefone_2']) ? $horizon_theme_options['telefone_2'] : "";
 
-$horizon_theme_options['facebook'] = isset($horizon_theme_options['facebook']) ? $horizon_theme_options['facebook'] : "https://www.facebook.com/infraeambiente";
-$horizon_theme_options['twitter'] = isset($horizon_theme_options['twitter']) ? $horizon_theme_options['twitter'] : "https://twitter.com/infraeambiente";
-$horizon_theme_options['instagram'] = isset($horizon_theme_options['instagram']) ? $horizon_theme_options['instagram'] : "https://www.instagram.com/reporterambiental";
+$horizon_theme_options['facebook'] = isset($horizon_theme_options['facebook']) ? $horizon_theme_options['facebook'] : "";
+$horizon_theme_options['twitter'] = isset($horizon_theme_options['twitter']) ? $horizon_theme_options['twitter'] : "";
+$horizon_theme_options['instagram'] = isset($horizon_theme_options['instagram']) ? $horizon_theme_options['instagram'] : "";
 $horizon_theme_options['flicker'] = isset($horizon_theme_options['flicker'] ) ? $horizon_theme_options['flicker'] : "";
-$horizon_theme_options['youtube'] = isset($horizon_theme_options['youtube']) ? $horizon_theme_options['youtube'] : "https://www.youtube.com/user/ambientesp";
+$horizon_theme_options['youtube'] = isset($horizon_theme_options['youtube']) ? $horizon_theme_options['youtube'] : "";
 
 $horizon_theme_options['divisoes_footer'] = isset($horizon_theme_options['divisoes_footer']) ?  $horizon_theme_options['divisoes_footer'] : 4;
 $horizon_theme_options['mostrar_borda_top'] = isset($horizon_theme_options['mostrar_borda_top']) ?  $horizon_theme_options['mostrar_borda_top'] : false;

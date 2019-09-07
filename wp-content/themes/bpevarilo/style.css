@@ -1281,6 +1281,11 @@ header{
 }
 
 
+.nav-item:hover{
+    background-color: #425a53;
+    border-radius: 2px;
+}
+
 
 button.navbar-toggler{
     background: #6c9286;

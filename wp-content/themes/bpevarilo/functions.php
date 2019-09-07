@@ -172,9 +172,9 @@ if ( ! function_exists( 'horizon_theme_support_init' ) ) {
 if ( ! function_exists( 'load_scripts' ) ) {
     function load_scripts(){
         //Scripts
-        wp_enqueue_script('sma-horizon-bootstrap-jquery', 'https://code.jquery.com/jquery-3.2.1.min.js', array( ), '3.2.1', true);
+        wp_enqueue_script('sma-horizon-bootstrap-jquery', 'https://code.jquery.com/jquery-migrate-3.0.0.min.js', array( ), '3.0.0', true);
         wp_enqueue_script('sma-horizon-bootstrap-jquery-popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', array('jquery'), '1.12.9', true);
-        wp_enqueue_script('sma-horizon-datepicker-jquery', 'https://code.jquery.com/ui/1.12.0/jquery-ui.min.js', array(), '1.12.0', true );
+        wp_enqueue_script('sma-horizon-datepicker-jquery', 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js', array('sma-horizon-bootstrap-jquery'), '1.12.1', true );
         wp_enqueue_script('sma-horizon-bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', array(), '4.0.0', true);
         wp_enqueue_script('sma-horizon-masonry-js','https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js', array(), '4.0.0', true);
         wp_enqueue_script('sma-horizon-horizon-js',SMA_HORIZON_THEME_URL.'/js/script.js', array('sma-horizon-masonry-js','sma-horizon-datepicker-jquery','sma-horizon-popup-js'), '1.0.0', true);

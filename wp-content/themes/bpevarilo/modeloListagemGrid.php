@@ -1,5 +1,18 @@
 <?php
+/**
+* Template Name: Listagem
+*
+* @package WordPress
+* @subpackage Twenty_Fourteen
+* @since Twenty Fourteen 1.0
+*/
     get_header(); 
+
+    $wp_query = new WP_Query( array(
+        'post_type' => 'post',
+        'orderby' => 'post_date',
+        'order' => 'ASC',
+      )); 
 ?>
 
 <section class="content-area metade-espaco-top">
@@ -17,3 +30,5 @@
 </section>
 
 <?php get_footer(); ?>
+
+
