@@ -1,10 +1,10 @@
  <!--	 Global site tag (gtag.js) - Google Analytics -->
- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136453015-1"></script>
+ <script async src="https://www.googletagmanager.com/gtag/js?id=xxxxxxxxx"></script>
 	<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'UA-136453015-1');
+        gtag('config', 'xxxxxxxxxxx');
      </script>
     

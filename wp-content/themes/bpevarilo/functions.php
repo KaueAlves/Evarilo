@@ -237,6 +237,31 @@ if ( ! function_exists( 'horizon_create_minislider' ) ) {
     }
 }add_shortcode( 'horizon_minislider', 'horizon_create_minislider' );
 
+if ( ! function_exists( 'evarilo_create_card' ) ) {
+    function evarilo_create_card($atts){
+        ob_start();
+            $a = shortcode_atts( array(
+                'img' => null,
+                'link' => null,
+                'title' => null,
+                'subtitle' => null,
+                'classeadicional' => null,
+            ), $atts );
+            
+            $img = isset($a['img']) ? $a['img'] : null;
+            $link = isset($a['link']) ? $a['link'] : null;
+            $title = isset($a['title']) ? $a['title'] : null;
+            $subtitle = isset($a['subtitle']) ? $a['subtitle'] : null;
+            $classeAdicional = isset($a['classeadicional']) ? $a['classeadicional'] : "col-12 col-md-6 col-lg-3";
+
+            include(SMA_HORIZON_THEME_PATH."/template-parts/cards/evarilo-card.php");
+    
+            $content = ob_get_contents();
+        ob_end_clean();  
+        return $content;  
+    }
+}add_shortcode( 'evarilo_card', 'evarilo_create_card' );
+
 if ( ! function_exists( 'horizon_create_destaques' ) ) {
     function horizon_create_destaques($atts){
         ob_start();

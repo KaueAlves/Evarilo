@@ -7,7 +7,6 @@
     ?>
     
     <div class="col-12 col-md-6 col-lg-3 item-post-pa espaco grid-item">
- 
         <div class="">
             <a href="<?php echo get_permalink(); ?>">
                 <div class="card" >
