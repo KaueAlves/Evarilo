@@ -218,25 +218,6 @@ if( ! function_exists( 'add_personalizar_css' )){
 }
 
 //Shortcode
-if ( ! function_exists( 'horizon_create_minislider' ) ) {
-    function horizon_create_minislider($atts){
-        ob_start();
-            $a = shortcode_atts( array(
-                'img' => null,
-                'ids' => null,
-            ), $atts );
-    
-            $urls = isset($a['img']) ? explode(',',$a['img']) : null;
-            $ids = isset($a['ids']) ? explode(',',$a['ids']) : null;
-    
-            include_once(SMA_HORIZON_THEME_PATH."/template-parts/minislider.php");
-    
-            $content = ob_get_contents();
-        ob_end_clean();  
-        return $content;  
-    }
-}add_shortcode( 'horizon_minislider', 'horizon_create_minislider' );
-
 if ( ! function_exists( 'evarilo_create_card' ) ) {
     function evarilo_create_card($atts){
         ob_start();
@@ -261,25 +242,6 @@ if ( ! function_exists( 'evarilo_create_card' ) ) {
         return $content;  
     }
 }add_shortcode( 'evarilo_card', 'evarilo_create_card' );
-
-if ( ! function_exists( 'horizon_create_destaques' ) ) {
-    function horizon_create_destaques($atts){
-        ob_start();
-            $a = shortcode_atts( array(
-                'titulo' => null,
-                'categorias' => null,
-            ), $atts );
-
-            $horizon_destaques_titulo = isset($a['titulo']) ? $a['titulo'] : null;
-            $horizon_destaques_categorias = isset($a['categorias']) ? explode(',',$a['categorias']) : null;
-
-            include_once(SMA_HORIZON_THEME_PATH."/template-parts/blocos/bloco-noticias/content-destaques.php");
-
-            $content = ob_get_contents();
-        ob_end_clean();  
-        return $content;  
-    }
-}add_shortcode( 'horizon_destaques', 'horizon_create_destaques' );
 
 if ( ! function_exists( 'horizon_create_relacionados' ) ) {
     function horizon_create_relacionados($atts){
@@ -417,217 +379,11 @@ if ( ! function_exists( 'set_default_custom_fields' ) ) {
     }
 }add_action('wp_insert_post', 'set_default_custom_fields');
 
-
 if ( ! function_exists( 'horizon_customize_register' ) ) {
     function horizon_customize_register($wp_customize){
         include_once( SMA_HORIZON_THEME_PATH.'/personalizar/horizon-options.php' );
     }
 }add_action('customize_register', 'horizon_customize_register');
-
-// ===================== The Events Calendar =======================
-
-if ( ! function_exists( 'montaQueryEvents' ) ) {
-    function montaQueryEvents($size = 10){
-
-        $eventos_tipodeatividade = isset($_GET['tipodeatividade_eventos']) ? $_GET['tipodeatividade_eventos'] : "";
-        $eventos_municipio  = isset($_GET['municipios_eventos']) ? $_GET['municipios_eventos'] : "";
-        $eventos_bompara = isset($_GET['bompara_eventos']) ? $_GET['bompara_eventos'] : "";
-        $eventos_data = isset($_GET['data_eventos']) ? str_replace('%2F','-',$_GET['data_eventos']) : date('Y-m-d H:i:s', time());
-        $data_escolhida = isset($_GET['data_escolhida']) ? $_GET['data_escolhida'] : false; 
-        
-        if($eventos_tipodeatividade != ''){
-            $eventos_tipodeatividade = array(
-                'taxonomy' => 'tipodeatividade',
-                'field'    => 'slug',
-                'terms'    => $eventos_tipodeatividade,
-            );
-        }
-
-        if($eventos_municipio != ''){
-            $eventos_municipio = array(
-                'taxonomy' => 'municipios',
-                'field'    => 'slug',
-                'terms'    => sanitize_title( $eventos_municipio ),
-            );
-        }
-
-        if($eventos_bompara != ''){
-            $eventos_bompara = array(
-                'taxonomy' => 'bompara',
-                'field'    => 'slug',
-                'terms'    => $eventos_bompara,
-            );
-        }
-
-        $inicio = array(
-            'key' => '_EventStartDate',
-        );
-
-        if($eventos_data != ''){
-            $eventos_data = str_replace("/", "-", $eventos_data);
-            $eventos_data = date("Y-m-d H:i:s", strtotime($eventos_data));
-
-            if(isset($_GET['data_eventos'])){
-                $day = date("w", strtotime($eventos_data));
-                $data_escolhida = array(
-                    'key' => 'horizon_dayofweek_'.$day,
-                    'value' => '0',
-                    'compare' => '=',
-                );
-            }
-            
-            if($eventos_data != date('Y-m-d H:i:s', time())){
-                $inicio = array(
-                    'key' => '_EventStartDate',
-                    'value' => date("Y-m-d H:i:s", strtotime("+1 day", strtotime($eventos_data))),
-                    'compare' => '<=',
-                    'type' => 'DATETIME',
-                );
-            }
-        }
-
-        $fim = array(
-            'key' => '_EventEndDate',
-            'value' => $eventos_data,
-            'compare' => '>=',
-            'type' => 'DATETIME',
-        );
-            
-        if(is_front_page()){
-            $args = array(
-                'post_type'      => 'tribe_events',
-                'posts_per_page' => $size,
-                'paged' => get_query_var('paged') ? get_query_var('paged') : 1,
-                'orderby'   => 'meta_value',
-                'order'     => 'ASC',
-                'meta_key'  => '_EventEndDate',
-                'meta_type' => 'DATE',
-                
-                'meta_query' => array(
-                    'relation' => 'AND',
-                    '_EventEndDate_clause' => $fim,
-                    '_EventStartDate_clause' => $inicio,
-                ),
-    
-                'tax_query' => array(
-                    'relation' => 'AND',
-                    $eventos_tipodeatividade,
-                    $eventos_municipio,
-                    $eventos_bompara,
-                    //$eventos_data
-                ),                   
-            );
-        }else{
-            $args = array(
-                'post_type'      => 'tribe_events',
-                'posts_per_page' => $size,
-                'paged' => get_query_var('paged') ? get_query_var('paged') : 1,
-                'orderby'   => 'ID',
-                'order'     => 'DESC',
-                
-                'meta_query' => array(
-                    'relation' => 'AND',
-                    '_EventEndDate_clause' => $fim,
-                    '_EventStartDate_clause' => $inicio,
-                    '_data_escolhida_clause' => $data_escolhida,
-                ),
-    
-                'tax_query' => array(
-                    'relation' => 'AND',
-                    $eventos_tipodeatividade,
-                    $eventos_municipio,
-                    $eventos_bompara,
-                    //$eventos_data
-                ),                   
-            );
-        }
-        
-        $wp_query = new WP_Query($args);
-
-        return $wp_query;
-    }    
-}
-
-if ( ! function_exists( 'horizon_widget_events' ) ) {
-    function horizon_widget_events(){
-        //Registra SideBars
-        function horizon_register_events() {
-    
-            register_sidebar( array(
-                'name'          => 'Sidebar Eventos' ,
-                'id'            => 'tribe_events_sidebar',
-                'description'   => __( 'Aqui vem o conteudo que será mostrado na listagem de Eventos', 'textdomain' ),
-                'before_widget' => '<li id="%1$s" class="widget %2$s metade-espaco-top">',
-                'after_widget'  => "<div class='borda-bottom-clara'></div></li>\n",
-                'before_title'  => '<h3 class="widgettitle metade-espaco">',
-                'after_title'   => "</h3>\n",
-            ) );
-            
-        }add_action( 'widgets_init', 'horizon_register_events' );
-    }
-}add_action( 'after_setup_theme', 'horizon_widget_events', 0 );
-
-if ( ! function_exists('alteraSidebarEvents') ){
-    function alteraSidebarEvents( $layout ){
-        if ( is_singular( 'tribe_events' ) || is_post_type_archive( 'tribe_events' ) ){
-            $layout = 'tribe_events_sidebar';
-            return $layout;
-        }
-        return $layout;
-    };
-}add_filter( 'horizon_sidebar_params','alteraSidebarEvents' );
-
-if (! function_exists('getcustomDateEvent')) {
-    function getcustomDateEvent($startDate, $endDate=null)
-    {
-        if (is_null($startDate)) {
-            return false;
-        }
-
-        $startDate =  mysql2date('d/m/Y', $startDate);
-        if (!is_null($endDate) && !empty($endDate)) {
-            $endDate =  mysql2date('d/m/Y', $endDate);
-        }
-
-        //datas diferentes
-        if ($startDate != $endDate) {
-            return $startDate .' a '. $endDate;
-        }
-        //datas iguais, retornar somente a data inicial
-        return $startDate;
-    }
-}
-
-// Redes sociais 
-function imprimirTagsCompartilhamento(){
-
-    $current_link = esc_url("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
-    $image['guid'] = isset($image) ? $image->guid : "http://arquivo.ambiente.sp.gov.br/home/2018/11/header-01-site.jpg";
-    $tags_list="";
-    if(is_single()){
-        $tags_list = get_the_tag_list( '<h4 style="display:inline;">Tags: </h4>', ', ', '' );
-    }
-
-    echo "<div class='row'><div class='col-12 div-btn-right redes-sociais espaco d-flex justify-content-between'>";
-    echo "<div class='mt-auto mb-auto'>".$tags_list."</div>";
-    echo "<div class='mt-auto mb-auto'>";
-    echo "<a href='https://www.linkedin.com/cws/share?url=".$current_link."' target='_blank'><i class='fa fa-linkedin'></i></a>";
-    echo "<a target='_blank' href='http://pinterest.com/pin/create/button/?url=".$current_link."&amp;media=".$image['guid']."&amp;description=".rawurlencode(get_the_title())."'><i class='fa fa-pinterest-p'></i></a>";
-    echo "<a href='http://twitter.com/intent/tweet?text=".get_the_title()."&url=".$current_link."&via=ambientesp' title='Twittar sobre".get_the_title()."' target='_blank'><i class='fa fa-twitter'></i></a>";
-    echo "<a href='http://facebook.com/share.php?u=".$current_link."&amp;t=".urlencode(the_title('','', false))."' target='_blank' title='Compartilhar ". get_the_title() ." no Facebook'><i class='fa fa-facebook-f'></i></a>";
-    echo "</div></div></div>";
-    
-}
-
-function compartilharRedesListagem(){
-
-    $image['guid'] = isset($image) ? $image->guid : "http://arquivo.ambiente.sp.gov.br/home/2018/11/header-01-site.jpg";
-
-    echo "<a href='https://www.linkedin.com/cws/share?url=".get_the_permalink()."' target='_blank'><i class='fa fa-linkedin'></i></a>";
-    echo "<a target='_blank' href='http://pinterest.com/pin/create/button/?url=".get_the_permalink()."&amp;media=".$image['guid']."&amp;description=".rawurlencode(get_the_title())."'><i class='fa fa-pinterest-p'></i></a>";
-    echo "<a href='http://twitter.com/intent/tweet?text=".get_the_title()."&url=".get_the_permalink()."&via=ambientesp' title='Twittar sobre".get_the_title()."' target='_blank'><i class='fa fa-twitter'></i></a>";
-    echo "<a href='http://facebook.com/share.php?u=".get_the_permalink()."&amp;t=".urlencode(the_title('','', false))."' target='_blank' title='Compartilhar ". get_the_title() ." no Facebook'><i class='fa fa-facebook-f'></i></a>";
-}
 
 // ============== Relacionados ==================
 
@@ -792,3 +548,49 @@ function inverter_ordem( $query ) {
     }
 }
 add_action( 'pre_get_posts', 'inverter_ordem' );
+
+
+// Criar custom post
+
+if ( ! function_exists( 'evarilo_create_post_type_universo' ) ) {
+    //Cria custom Posts
+    function evarilo_create_post_type_universo() 
+    {
+
+        $labels = array(
+            'name'                => _x( 'Universo', 'Post Type General Name', 'horizon' ),
+            'singular_name'       => _x( 'Universo', 'Post Type Singular Name', 'horizon' ),
+            'menu_name'           => __( 'Universo', 'horizon' ),
+            'parent_item_colon'   => __( 'Parente Universo', 'horizon' ),
+            'all_items'           => __( 'Todos Universo', 'horizon' ),
+            'view_item'           => __( 'View Universo', 'horizon' ),
+            'add_new_item'        => __( 'Add Novo Universo', 'horizon' ),
+            'add_new'             => __( 'Add Novo', 'horizon' ),
+            'edit_item'           => __( 'Edit Universo', 'horizon' ),
+            'update_item'         => __( 'Atualizar Universo', 'horizon' ),
+            'search_items'        => __( 'Pesquisa Universo', 'horizon' ),
+            'not_found'           => __( 'Nada Encontrado', 'horizon' ),
+            'not_found_in_trash'  => __( 'Nada Encontrado no lixo', 'horizon' ),
+        );
+
+        $args =  array(
+            'label'               => __( 'Universo', 'horizon' ),
+            'description'         => __( 'Universo', 'horizon' ),
+            'supports'            => array( 'title', 'editor',  'thumbnail', 'revisions', 'custom-fields','page-attributes' ),
+            'hierarchical'        => true,
+            'public'              => true,
+            'show_ui'             => true,
+            'show_in_menu'        => true,
+            'show_in_nav_menus'   => true,
+            'show_in_admin_bar'   => true,
+            'menu_position'       => 5,
+            'can_export'          => true,
+            'has_archive'         => true,
+            'exclude_from_search' => false,
+            'publicly_queryable'  => true,
+            'capability_type'     => 'post',
+        );
+        register_post_type( 'universo', $args);
+    }add_action( 'init', 'evarilo_create_post_type_universo' );
+
+}add_action( 'init', 'evarilo_create_post_type_universo', 0 );
